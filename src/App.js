@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+/*import logo from './logo.svg'; */
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import Navigation from './Navigation'; 
 
 
 // Initialize Firebase
@@ -19,7 +20,10 @@ import RoomList from './components/RoomList';
 class App extends Component {
   render() {
     return (
-      <RoomList firebase={firebase}/>  
+      <div id="renders">
+      <Navigation />    
+      <RoomList firebase={firebase}/> 
+      </div> 
     );
   }
 }

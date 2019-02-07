@@ -22,7 +22,8 @@ class App extends Component {
     return (
       <div id="renders">
       <Navigation />    
-      <RoomList firebase={firebase}/> 
+      <RoomList firebase={firebase} /> 
+      <MessageList firebase={firebase} />
       </div> 
     );
   }

@@ -4,6 +4,7 @@ import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import Navigation from './Navigation'; 
+import MessageList from './components/MessageList';
 
 
 // Initialize Firebase

@@ -9,7 +9,6 @@ class extend MessageList Component {
     };
 
   	this.messageRef = this.props.firebase.database().ref('messages');
-  	this.selectRoom = this.selectRoom.bind(this);
   }
 
   componentDidMount() {
@@ -18,17 +17,20 @@ class extend MessageList Component {
      });
   }
 
-
- /* Not to self, render messages on main pg, not sidebar */
+  /* render message on main pg */
   render() {
     return (
     	<div className="container-fluid messages"
-      <div className="message-list">
-        this.handleClick={( room, message ) => this.state(room, message) }
-        <h3 className="room-name">room={ this.state.room }</h3>
-        <p className="username">username={ this.state.username }</p>
-        <p className="message">messages={ this.state.messages }</p> 
-      </div>
+    	  <div className="row">
+            <div className="message-list" 
+            { this.state.messages.map( (message) => key={message.key}>
+              <h3 className="room-name">room={ this.props.activeRoom }</h3>
+              <p className="username">username={ message.username }</p>
+              <p className="username">username={ message.sentAt }</p>
+              <p className="message">messages={ message.content }</p> 
+            )}
+            </div>
+         </div>
       </div>
     );
   }

@@ -9,7 +9,8 @@ class RoomList extends Component {
         activeRoom: '' 
     };
     this.roomsRef = this.props.firebase.database().ref('rooms');
-    this.createRoom = this.createRoom.bind(this); 	
+    this.createRoom = this.createRoom.bind(this); 
+    this.handleChange = this.handleChange.bind(this);	
   }
 
     componentDidMount() {
@@ -40,11 +41,6 @@ class RoomList extends Component {
         this.setState({ rooms: [...this.state.rooms, newRoom] });
     }
     
-    /* display the rooms messages */
-    handleClick(room, message) {
-      this.setState({ room: activeRoom });
-      this.setState({ messages: [...this.state.messages, message] });
-    } 
 
     render() {
       return (
@@ -55,9 +51,9 @@ class RoomList extends Component {
               <div class="sidebar-sticky">
                 
                 <div className="all-rooms">
-                  {this.state.rooms.map( (rooms) => 
-                    <div className="room-list" key={ rooms.key }> 
-                      <button className="rooms-button" onClick={ this.handleClick }>{ rooms.name }</button>
+                  {this.state.rooms.map( (room) => 
+                    <div className="room-list" key={ room.key } className={ this.props.activeRoom} > 
+                      <button className="rooms-button" onClick={ () =>this.props.setRoom }>{ room.name }</button>
                     </div>
                   )}
                   <form onSubmit={ (e) => this.handleSubmit(e) }>

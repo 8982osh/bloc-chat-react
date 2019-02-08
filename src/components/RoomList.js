@@ -14,10 +14,10 @@ class RoomList extends Component {
   }
 
     componentDidMount() {
-     this.roomsRef.on('child_added', snapshot => {
+      this.roomsRef.on('child_added', snapshot => {
      	const room = snapshot.val();
      	room.key = snapshot.key;
-     this.setState({ rooms: this.state.rooms.concat( room ) })
+      this.setState({ rooms: this.state.rooms.concat( room ) })
      });
     }
 
@@ -40,20 +40,25 @@ class RoomList extends Component {
         const newRoom = { newRoom: this.state.newRoom };
         this.setState({ rooms: [...this.state.rooms, newRoom] });
     }
-    
+  
+    /* set to current room for messages */
+    setRoom(room) {
+      this.props.activeRoom(room);
+    }
+
 
     render() {
       return (
         /* Sidebar */
         <div className="container-fluid sidebar">
           <div className="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-              <div class="sidebar-sticky">
+            <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+              <div className="sidebar-sticky">
                 
                 <div className="all-rooms">
                   {this.state.rooms.map( (room) => 
-                    <div className="room-list" key={ room.key } className={ this.props.activeRoom} > 
-                      <button className="rooms-button" onClick={ () =>this.props.setRoom }>{ room.name }</button>
+                    <div className="room-list" key={ room.key }> 
+                      <button className="rooms-button" onClick={ (e) => this.setRoom(room) }> { room.name }</button>
                     </div>
                   )}
                   <form onSubmit={ (e) => this.handleSubmit(e) }>

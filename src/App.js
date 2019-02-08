@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-/*import logo from './logo.svg'; */
 import './App.css';
 import * as firebase from 'firebase';
-import RoomList from './components/RoomList';
-import Navigation from './Navigation'; 
-import MessageList from './components/MessageList';
+import RoomList from './components/RoomList.js';
+import Navigation from './Navigation.js'; 
+import MessageList from './components/MessageList.js';
 
 
 // Initialize Firebase

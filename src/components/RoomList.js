@@ -6,7 +6,7 @@ class RoomList extends Component {
   	this.state = {
         rooms: [],
         newRoom: '',
-        activeRoom: '' 
+        
     };
     this.roomsRef = this.props.firebase.database().ref('rooms');
     this.createRoom = this.createRoom.bind(this); 
@@ -31,7 +31,7 @@ class RoomList extends Component {
     /*  */
     handleChange(e){
       e.preventDefault();	
-      this.setState({newRoom: e.target.value});  
+      this.setState({ newRoom: e.target.value });  
     }
 
     /* submit a new room */
@@ -40,36 +40,22 @@ class RoomList extends Component {
         const newRoom = { newRoom: this.state.newRoom };
         this.setState({ rooms: [...this.state.rooms, newRoom] });
     }
-  
-    /* set to current room for messages */
-    setRoom(room) {
-      this.props.activeRoom(room);
-    }
 
 
     render() {
       return (
         /* Sidebar */
-        <div className="container-fluid sidebar">
-          <div className="row">
-            <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-              <div className="sidebar-sticky">
-                
-                <div className="all-rooms">
-                  {this.state.rooms.map( (room) => 
-                    <div className="room-list" key={ room.key }> 
-                      <button className="rooms-button" onClick={ (e) => this.setRoom(room) }> { room.name }</button>
-                    </div>
-                  )}
-                  <form onSubmit={ (e) => this.handleSubmit(e) }>
-                    <input type="text" value={ this.state.newRoom } onChange={ (e) => this.handleChange(e) } />
-                    <button id="submit" onClick={ this.createRoom }>Submit</button>
-                  </form>
-                </div>
-              </div>
-            </nav>    
-         </div>
-      </div>
+        <div className="sidebar">
+          {this.state.rooms.map( (room) => 
+            <div className="room-list" key={room.key}> 
+              <button id="rooms-button" onClick={() => this.setCurrentRoom(room)}>{room.name}</button>
+            </div>
+          )}
+          <form onSubmit={(e) => this.handleSubmit(e)}>
+            <input id="submit-field" type="text" value={this.state.newRoom} onChange={(e) => this.handleChange(e)} />
+              <button className="btn btn-primary" onClick={this.createRoom}>Submit</button>
+            </form>
+        </div> 
       );
     }
 }

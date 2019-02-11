@@ -4,11 +4,10 @@ class MessageList extends Component {
   constructor(props) {
   	super(props);
   	this.state = {
-        messages: [],
-        newMessage: ''
-
+        messages: [], /* all messages */
+        selectedMessages: [],  /* messages for the selected room */ 
     };
-  	this.messageRef = this.props.firebase.database().ref('messages');
+  	this.messagesRef = this.props.firebase.database().ref('messages');
   }
 
   componentDidMount() {
@@ -19,28 +18,34 @@ class MessageList extends Component {
      });
   }
 
- 
+  /* set the current room */
+  setCurrentRoom(room) {
+    this.setState({ room: room })  
+  }
 
-  /* render message on main pg */
+  /* retrieve messages for the selected Room */
+  getRoomMessages() {
+   	this.selectedMessages({ selectedMessages: this.state.messages.filter(message => 
+   		message.key) 
+   	 });
+   return this.selectedMessages /* array of msgs */
+  }
+          
+  /* render messages on main section */
   render() {
     return (
-    	<div className="container-fluid messages">
-    	  <div className="row">
-            <div className="all-message"> 
-              { this.state.messages.map( (message) => 
-              	<div className="message" key={message.key}>
-                <div>
-                  <h3 className="room-name"> activeRoom={ this.activeRoom }</h3>
-                  <p className="content">content={ message.content }</p>
-                  <p className="username">username={ message.username }</p>
-                  <p className="sentAt">sentAt={ message.sentAt }</p>
-                </div>
-                </div> 
-              )}
-              
-            </div>
-         </div>
-      </div>
+      <div className="messageList">
+          {this.state.getRoomMessages.map( (message) => 
+            <div className="message" key={message.key}>
+              <div>
+                <h3 className="main-header">{this.setCurrentRoom()}</h3>
+                <p className="content">{message.content}</p>
+                <p className="username">{message.username}</p>
+                <p className="sentAt">{message.sentAt}</p>
+              </div>
+            </div> 
+          )}  
+      </div>   
     );
   }
 }

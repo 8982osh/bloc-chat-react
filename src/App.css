@@ -1,97 +1,58 @@
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
+/* headings for all content */
+.main-header {
+  text-align: center;
 }
-
 
 /* Navbar styling */
+.navbar.navbar-default.navbar-fixed-top {
+  background-color: #000000;
+}
 
 .navbar-brand {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: 1rem;
-  background-color: rgba(0, 0, 0, .25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-}
-
-
-/* sidebar styling */
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
-
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
-
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
-  color: #007bff;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: .75rem;
-  text-transform: uppercase;
+  color: #FFFFFF !important;
+  font-weight: 10px !important;
 }
 
 /* RoomList styling */
 /* move buttons toward center */
-.all-rooms {
-  padding-left: 20px;
+
+.container-fluid {
+  padding: 60px 50px;
+  background-color: #FFFFFF;
 }
 
-/* style buttons text */
-.listrooms {
-  text-align: center;
-  font-size: 30px;
+/* sidebar styling */
+.sidebar {
+  padding-top: 20px;
+  padding-left: 20px;
+
+}
+
+
+/* submit input field */
+#submit-field {
+  width: 100px;  
+  height: 30px;
+  border: 2px solid #D3D3D3;
+  border-radius: 4px;
+}
+
+/* space submit button from input field */
+.btn.btn-primary {
+  margin-left: 10px; 
+  font-size: 15px; 
 }
 
 /* add vertical space between buttons */
-.rooms-button {
-  margin: 15px 15px 0 0 ;
+#rooms-button {
+  background-color: #D3D3D3;  /* HTML Lightgray */
+  color: #000000;
+  border: 1px;
+  border-color: #D3D3D3; /* HTML Lightgray */
+  font-size: 20px;
+  text-align: center;
   text-transform: capitalize;
- 
+  margin: 10px 0px 10px 0px;
 }
 
-
-
-/* Messages styling */
-.container-fluid.messages {
-  background-color: #FFFFFF;
-
-}
 

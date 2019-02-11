@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
-import RoomList from './components/RoomList.js';
-import Navigation from './Navigation.js'; 
-import MessageList from './components/MessageList.js';
+import RoomList from './components/RoomList';
+import Navigation from './Navigation'; 
+import MessageList from './components/MessageList';
 
 
 // Initialize Firebase
@@ -20,10 +20,22 @@ import MessageList from './components/MessageList.js';
 class App extends Component {
   render() {
     return (
-      <div id="renders">
-      <Navigation />    
-      <RoomList firebase={firebase} /> 
-      <MessageList firebase={firebase} />
+      <div className="App">
+        <header>
+          <Navigation /> 
+        </header>
+        <main>
+          <div className="container-fluid">
+            <div className="row>">
+              <div className="col-xs-4">
+                <RoomList firebase={firebase} />
+              </div>
+              <div className="col-xs-6">
+                <MessageList firebase={firebase} />
+              </div>
+            </div>
+            </div>
+        </main>
       </div> 
     );
   }

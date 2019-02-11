@@ -5,10 +5,13 @@ class Navigation extends React.Component {
     return (
 
       /* Navbar heading */
-      <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <nav className="navbar-brand col-sm-3 col-md-2 mr-0">BLOC CHAT ROOMS</nav> 
-      </nav>
-  
+      <div className="navigation">
+        <nav className="navbar navbar-default navbar-fixed-top">
+          <div className="container">
+            <nav className="navbar-brand">BLOC CHAT ROOMS</nav>
+          </div> 
+        </nav>
+     </div>
     )
   }
 }

@@ -28,7 +28,7 @@ class RoomList extends Component {
       this.setState({ newRoom: ''});	
     } 
 
-    /*  */
+
     handleChange(e){
       e.preventDefault();	
       this.setState({ newRoom: e.target.value });  
@@ -38,7 +38,6 @@ class RoomList extends Component {
     handleSubmit(e) {
     	e.preventDefault();
         const newRoom = { newRoom: this.state.newRoom };
-        this.setState({ rooms: [...this.state.rooms, newRoom] });
     }
 
 
@@ -46,14 +45,14 @@ class RoomList extends Component {
       return (
         /* Sidebar */
         <div className="sidebar">
-          {this.state.rooms.map( (room) => 
-            <div className="room-list" key={room.key}> 
-              <button id="rooms-button" onClick={() => this.setCurrentRoom(room)}>{room.name}</button>
+          { this.state.rooms.map( (room) => 
+            <div className="room-list" key={ room.key }> 
+              <button id="rooms-button" onClick={ () => this.props.setCurrentRoom(room) }>{ room.name }</button>
             </div>
           )}
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            <input id="submit-field" type="text" value={this.state.newRoom} onChange={(e) => this.handleChange(e)} />
-              <button className="btn btn-primary" onClick={this.createRoom}>Submit</button>
+          <form onSubmit={ (e) => this.handleSubmit(e) }>
+            <input id="submit-field" type="text" value={ this.state.newRoom } onChange={ (e) => this.handleChange(e) } />
+              <button className="btn btn-primary" onClick={ this.createRoom }>Submit</button>
             </form>
         </div> 
       );

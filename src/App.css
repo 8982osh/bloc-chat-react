@@ -1,7 +1,9 @@
 /* headings for all content */
 .main-header {
   text-align: center;
+  text-transform: capitalize;
 }
+
 
 /* Navbar styling */
 .navbar.navbar-default.navbar-fixed-top {
@@ -14,7 +16,6 @@
 }
 
 /* RoomList styling */
-/* move buttons toward center */
 
 .container-fluid {
   padding: 60px 50px;
@@ -27,7 +28,6 @@
   padding-left: 20px;
 
 }
-
 
 /* submit input field */
 #submit-field {
@@ -42,6 +42,7 @@
   margin-left: 10px; 
   font-size: 15px; 
 }
+
 
 /* add vertical space between buttons */
 #rooms-button {

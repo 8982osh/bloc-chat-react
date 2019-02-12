@@ -4,8 +4,8 @@ class MessageList extends Component {
   constructor(props) {
   	super(props);
   	this.state = {
-        messages: [], /* all messages */
-        selectedMessages: [],  /* messages for the selected room */ 
+        messages: [], /* all messages for every room */
+        selectedMessages: [],  /* array msgs for the selected room */ 
     };
   	this.messagesRef = this.props.firebase.database().ref('messages');
   }
@@ -16,32 +16,40 @@ class MessageList extends Component {
       message.key = snapshot.key;
       this.setState({ messages: this.state.messages.concat( message ) })
      });
+
   }
 
-  /* set the current room */
-  setCurrentRoom(room) {
-    this.setState({ room: room })  
+ /* Verify component and subcomponents properly rendered */
+  componentDidUpdate(prevProps) {
+  // Typical usage (don't forget to compare props):
+    if (this.props.activeRoom !== prevProps.activeRoom) {
+      console.log('props did update');
+      this.getRoomMessages();
+    }
   }
+  
 
-  /* retrieve messages for the selected Room */
+  /* get messages by filtering for the selected Room */
+  /* use console to test if working */
   getRoomMessages() {
-   	this.selectedMessages({ selectedMessages: this.state.messages.filter(message => 
-   		message.key) 
+    console.log('this did run');
+   	this.setState({ selectedMessages: this.state.messages.filter(message => 
+   		message.room == this.props.activeRoom.key) 
    	 });
-   return this.selectedMessages /* array of msgs */
   }
           
   /* render messages on main section */
   render() {
+    let messageHeader = (this.props.activeRoom.hasOwnProperty('name')) ? `Messages for ${this.props.activeRoom.name}` : '';
     return (
       <div className="messageList">
-          {this.state.getRoomMessages.map( (message) => 
-            <div className="message" key={message.key}>
+        <h2 className="main-header">{ messageHeader }</h2>
+          { this.state.selectedMessages.map( (message) => 
+            <div className="message" key={ message.key }>
               <div>
-                <h3 className="main-header">{this.setCurrentRoom()}</h3>
-                <p className="content">{message.content}</p>
-                <p className="username">{message.username}</p>
-                <p className="sentAt">{message.sentAt}</p>
+                <p className="content">{ message.content }</p>
+                <p className="username">{ message.username }</p>
+                <p className="sentAt">{ message.sentAt }</p>
               </div>
             </div> 
           )}  

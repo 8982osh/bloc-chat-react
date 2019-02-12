@@ -17,7 +17,20 @@ import MessageList from './components/MessageList';
   };
   firebase.initializeApp(config);
 
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+      this.state = {
+        activeRoom: '', /* current rm in use */
+    };
+  }
+
+  /* set the current room for selected msgs */
+  setCurrentRoom(room) {
+    this.setState({ activeRoom: room });  
+  }
+
   render() {
     return (
       <div className="App">
@@ -28,10 +41,10 @@ class App extends Component {
           <div className="container-fluid">
             <div className="row>">
               <div className="col-xs-4">
-                <RoomList firebase={firebase} />
+                <RoomList firebase={ firebase } setCurrentRoom={(room)=>this.setCurrentRoom(room)} />
               </div>
               <div className="col-xs-6">
-                <MessageList firebase={firebase} />
+                <MessageList firebase={ firebase } activeRoom={this.state.activeRoom} />
               </div>
             </div>
             </div>

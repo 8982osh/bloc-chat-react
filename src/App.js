@@ -4,6 +4,8 @@ import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import Navigation from './Navigation'; 
 import MessageList from './components/MessageList';
+import User from './components/User';
+
 
 
 // Initialize Firebase
@@ -23,12 +25,17 @@ class App extends Component {
     super(props)
       this.state = {
         activeRoom: '', /* current rm in use */
+        user: null
     };
   }
 
   /* set the current room for selected msgs */
   setCurrentRoom(room) {
     this.setState({ activeRoom: room });  
+  }
+
+  setUser(user) {
+    this.setState({user: user});
   }
 
   render() {
@@ -41,11 +48,12 @@ class App extends Component {
           <div className="container-fluid">
             <div className="row>">
               <div className="col-xs-4">
-                <RoomList firebase={ firebase } setCurrentRoom={(room)=>this.setCurrentRoom(room)} />
+                <RoomList firebase={firebase} setCurrentRoom={(room)=>this.setCurrentRoom(room)} />
               </div>
               <div className="col-xs-6">
-                <MessageList firebase={ firebase } activeRoom={this.state.activeRoom} />
+                <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />   
               </div>
+              <User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} /> 
             </div>
             </div>
         </main>

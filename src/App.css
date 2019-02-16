@@ -57,3 +57,23 @@
 }
 
 
+/* User styling */
+/* style sign in button */
+#sign-in-header {
+  text-align: center;
+  margin-top: 100px;
+}
+
+/* style sign in field */
+.sign-in-field {
+}
+
+#loginButton {
+  
+}
+
+#signout {
+ 
+}
+
+

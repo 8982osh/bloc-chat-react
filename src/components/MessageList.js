@@ -26,7 +26,7 @@ class MessageList extends Component {
       console.log('props did update');
       this.getRoomMessages();
     }
-  }
+  } 
   
 
   /* get messages by filtering for the selected Room */
@@ -34,7 +34,7 @@ class MessageList extends Component {
   getRoomMessages() {
     console.log('this did run');
    	this.setState({ selectedMessages: this.state.messages.filter(message => 
-   		message.room == this.props.activeRoom.key) 
+   		message.room === this.props.activeRoom.key) 
    	 });
   }
           

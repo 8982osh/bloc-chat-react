@@ -4,8 +4,9 @@ class MessageList extends Component {
   constructor(props) {
   	super(props);
   	this.state = {
-        messages: [], /* all messages for every room */
-        selectedMessages: [],  /* array msgs for the selected room */ 
+        messages: [], /* all msgs for every room */
+        selectedMessages: [],  /* msgs for the selected room */ 
+        /* newMessage */
     };
   	this.messagesRef = this.props.firebase.database().ref('messages');
   }
@@ -28,6 +29,28 @@ class MessageList extends Component {
     }
   } 
   
+ /*
+  createMessage(e) {
+    e.preventDefault();
+    this.newMessage.push({ message: this.state.newMessage )};
+    this.setState({ newMessage: ‘’});  
+  }
+ */
+
+ /* submit a new message 
+  handleSubmit(e) {
+    e.preventDefault();
+    const newMessage = { newMessage: this.state.newMessage };
+  }
+  */
+
+  /*
+  handleChange(e) {
+  e.preventDefault();
+  this.setState({ newMessage: e.target.value }); 
+  }
+  */
+
 
   /* get messages by filtering for the selected Room */
   /* use console to test if working */

@@ -4,9 +4,7 @@ import React, { Component } from 'react';
     constructor(props) {
       super(props);
         this.state = { 
-          users: [],
-          signedOn: false
-
+          users: [],   
     };
   	this.usersRef = this.props.firebase.database().ref('users');
     this.signInWithPopup = this.signInWithPopup.bind(this);
@@ -24,9 +22,9 @@ import React, { Component } from 'react';
   /* return obj with user property. pass obj to callback func */
   signInWithPopup() {
     const provider = new this.props.firebase.auth.GoogleAuthProvider(); 
-    this.props.firebase.auth().signInWithPopup(provider).then(result => { 
-    this.props.userName(result.user.displayName)
-    this.setState({signedOn: true})
+    this.props.firebase.auth().signInWithPopup(provider).then((result) => { 
+    const user = result.user;
+    this.setState({user});
     });
   }
  
@@ -34,17 +32,16 @@ import React, { Component } from 'react';
   signOutWithPopup(user) {
     this.props.firebase.auth().signOut(); 
     this.props.setUser(null); /* reset the user to null */
-    this.setState({signedOn: false})
   }
 
 
-  render() {  
+  render() { 
     return (
       <div className="login-prompt">
-        <div className="display-user">{this.props.user ? this.props.user.displayName: ''}</div>
-          <button id="loginButton" onClick={this.props.user ? this.signInWithPopup : this.signOutWithPopup }>
-            <span>Sign { this.props.user ? 'Out' : 'In'}</span>
-          </button>
+        <button id="loginButton" onClick={this.props.user ? this.signOutWithPopup : this.signInWithPopup}>
+          <span>Sign {this.props.user ? 'Out' : 'In'}</span>
+        </button>
+         <div id="login-name">{this.props.user ? this.props.user.displayName: ''}</div>
       </div>
     )
   }      

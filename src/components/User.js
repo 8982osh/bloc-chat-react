@@ -4,7 +4,8 @@ import React, { Component } from 'react';
     constructor(props) {
       super(props);
         this.state = { 
-          users: [],   
+          users: [],
+    
     };
   	this.usersRef = this.props.firebase.database().ref('users');
     this.signInWithPopup = this.signInWithPopup.bind(this);
@@ -14,7 +15,7 @@ import React, { Component } from 'react';
   /* listen for chg, ck if user obj exists and store it */
   componentDidMount() {
     this.props.firebase.auth().onAuthStateChanged( user => {
-      this.props.setUser(user);
+      this.setState({user});
     });
   }
 
@@ -34,18 +35,29 @@ import React, { Component } from 'react';
     this.props.setUser(null); /* reset the user to null */
   }
 
+  /* verify user logged in and has selected active room before posting msg 
+  verifyUser(e){
+  e.preventDefault();
+    if(!this.props.user && !this.props.activeRoom) {
+      alert("Please select a room, before posting a message.");
+    } else { 
+    this.props.createMessage();
+    }
+  } */
 
+  /* render new message in active room */
   render() { 
     return (
       <div className="login-prompt">
-        <button id="loginButton" onClick={this.props.user ? this.signOutWithPopup : this.signInWithPopup}>
+        <button className="btn btn-info" onClick={this.props.user ? this.signOutWithPopup : this.signInWithPopup}>
           <span>Sign {this.props.user ? 'Out' : 'In'}</span>
         </button>
-         <div id="login-name">{this.props.user ? this.props.user.displayName: ''}</div>
+        <div className="login-name">Logged in as: {this.props.user ? this.props.user.displayName: ''}</div>
       </div>
-    )
+    );
   }      
 }
 
+         
 
 export default User;

@@ -7,7 +7,6 @@ import MessageList from './components/MessageList';
 import User from './components/User';
 
 
-
 // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBM5_zSzcc_1zrVJblgtfoWO7HMWMAkxK8",
@@ -25,18 +24,22 @@ class App extends Component {
     super(props)
       this.state = {
         activeRoom: '', /* current rm in use */
-        user: null
+        user: null,
+        
     };
+    this.setCurrentRoom = this.setCurrentRoom.bind(this);
+    this.setUser = this.setUser.bind(this);
   }
 
   /* set the current room for selected msgs */
   setCurrentRoom(room) {
-    this.setState({ activeRoom: room });  
+    this.setState({activeRoom: room });  
   }
 
   setUser(user) {
     this.setState({user: user});
   }
+
 
 
   render() {
@@ -52,11 +55,13 @@ class App extends Component {
                 <RoomList firebase={firebase} setCurrentRoom={(room)=>this.setCurrentRoom(room)} />
               </div>
               <div className="col-xs-6">
-                <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />   
+                <MessageList firebase={firebase} activeRoom={this.state.activeRoom} /> 
               </div>
-              <User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} /> 
+              <div className="col-xs-2">
+                <User firebase={firebase} setUser={this.state.setUser} user={this.state.user} /> 
+              </div>
             </div>
-            </div>
+          </div>
         </main>
       </div> 
     );

@@ -74,12 +74,12 @@
 }
 
 /* Message Styling */
-.message-form {
+#message-form {
   margin-top: 400px;
 }
 
 /*  message input field */
-.message-field {
+#message-field {
   margin-top: 10px;
   margin-bottom: 10px;
   height: 30px;
@@ -90,7 +90,7 @@
 }
 
 /* send button */
-.message-btn {
+#message-btn {
   background-color: green;
   color: #FFFFFF;
   width: 100px !important;

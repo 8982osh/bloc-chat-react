@@ -5,6 +5,7 @@ import React, { Component } from 'react';
       super(props);
         this.state = { 
           users: [],
+          user: '',
     
     };
   	this.usersRef = this.props.firebase.database().ref('users');
@@ -15,7 +16,7 @@ import React, { Component } from 'react';
   /* listen for chg, ck if user obj exists and store it */
   componentDidMount() {
     this.props.firebase.auth().onAuthStateChanged( user => {
-      this.setState({user});
+      this.props.setUser(user);
     });
   }
 
@@ -25,7 +26,7 @@ import React, { Component } from 'react';
     const provider = new this.props.firebase.auth.GoogleAuthProvider(); 
     this.props.firebase.auth().signInWithPopup(provider).then((result) => { 
     const user = result.user;
-    this.setState({user});
+    this.props.setUser(user);
     });
   }
  
@@ -52,7 +53,7 @@ import React, { Component } from 'react';
         <button className="btn btn-info" onClick={this.props.user ? this.signOutWithPopup : this.signInWithPopup}>
           <span>Sign {this.props.user ? 'Out' : 'In'}</span>
         </button>
-        <div className="login-name">Logged in as: {this.props.user ? this.props.user.displayName: ''}</div>
+        <div className="login-name">Logged in as: {this.props.user ? this.props.user.displayName: ''}</div> 
       </div>
     );
   }      

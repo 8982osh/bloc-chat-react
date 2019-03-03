@@ -52,13 +52,13 @@ class App extends Component {
           <div className="container-fluid">
             <div className="row>">
               <div className="col-xs-4">
-                <RoomList firebase={firebase} setCurrentRoom={(room)=>this.setCurrentRoom(room)} />
+                <RoomList firebase={firebase} setCurrentRoom={(room)=>this.setCurrentRoom(room)} user={this.state.user} />
               </div>
               <div className="col-xs-6">
-                <MessageList firebase={firebase} activeRoom={this.state.activeRoom} /> 
+                <MessageList firebase={firebase} activeRoom={this.state.activeRoom} user={this.state.user} /> 
               </div>
               <div className="col-xs-2">
-                <User firebase={firebase} setUser={this.state.setUser} user={this.state.user} /> 
+                <User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} /> 
               </div>
             </div>
           </div>

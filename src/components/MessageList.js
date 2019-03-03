@@ -10,7 +10,7 @@ class MessageList extends Component {
     };
   	this.messagesRef = this.props.firebase.database().ref('messages');
     this.createMessage = this.createMessage.bind(this); 
-    this.handleChange = this.handleChange.bind(this); 
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -30,21 +30,29 @@ class MessageList extends Component {
     }
   } 
   
+  /* create a new msg */
   createMessage(e) {
     e.preventDefault();
-    this.setState({ newMessage: ''}); 
-    this.messagesRef.push({ message: this.state.newMessage });
+    this.messagesRef.push({ 
+      content: this.state.newMessage,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+      room: this.state.room,
+      username: this.state.username
+    });
+    this.setState({ newMessage: '' });
   }
 
- 
+  
   handleChange(e) {
     e.preventDefault();
     this.setState({ newMessage: e.target.value }); 
   }
 
+
   handleSubmit(e) {
     e.preventDefault();
     const newMessage = { newMessage: this.state.newMessage };
+    this.setState({ messages: [...this.state.messages, newMessage], });
   }
   
   /* get messages by filtering for the selected Room */
@@ -56,7 +64,7 @@ class MessageList extends Component {
    	 });
   }
        
-
+    
   /* render messages on center section */
   render() {
     let messageHeader = (this.props.activeRoom.hasOwnProperty('name')) ? `Messages for ${this.props.activeRoom.name}` : '';
@@ -69,11 +77,13 @@ class MessageList extends Component {
               <p className="username">{ message.username }</p>
               <p className="sentAt">{ message.sentAt }</p>
             
-              <form className="message-form" onSubmit={ (e) => this.handleSubmit(e) }>
-                <input className="message-field" type="text" value={ this.state.newMessage } onChange={ (e) => this.handleChange(e) } />
-                <button className="message-btn" onClick={ this.createMessage }>Submit</button>
-              </form> 
-            </div>
+            <div id="message-form">
+              <form onSubmit={ this.handleSubmit } >
+                <input id="message-field" type="text" value={ this.props.newMessage } onChange={ this.props.handleChange } />
+                <button id="message-btn" onClick={ this.createMessage }>Send</button>
+              </form>
+            </div> 
+            </div>     
           )}  
       </div>   
     );

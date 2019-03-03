@@ -50,8 +50,8 @@ class RoomList extends Component {
           )}
           <form onSubmit={ (e) => this.handleSubmit(e) }>
             <input id="submit-field" type="text" value={ this.state.newRoom } onChange={ (e) => this.handleChange(e) } />
-              <button className="btn btn-primary" onClick={ this.createRoom }>Submit</button>
-            </form>
+            <button className="btn btn-primary" onClick={ this.createRoom }>Submit</button>
+          </form>
         </div> 
       );
     }

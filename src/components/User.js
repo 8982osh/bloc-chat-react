@@ -5,7 +5,7 @@ import React, { Component } from 'react';
       super(props);
         this.state = { 
           users: [],
-          user: '',
+          user: ''
     
     };
   	this.usersRef = this.props.firebase.database().ref('users');
@@ -36,15 +36,6 @@ import React, { Component } from 'react';
     this.props.setUser(null); /* reset the user to null */
   }
 
-  /* verify user logged in and has selected active room before posting msg 
-  verifyUser(e){
-  e.preventDefault();
-    if(!this.props.user && !this.props.activeRoom) {
-      alert("Please select a room, before posting a message.");
-    } else { 
-    this.props.createMessage();
-    }
-  } */
 
   /* render new message in active room */
   render() { 

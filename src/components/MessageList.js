@@ -6,7 +6,7 @@ class MessageList extends Component {
   	this.state = {
         messages: [], /* all msgs for every room */
         selectedMessages: [],  /* msgs for the selected room */ 
-        newMessage: '', 
+        newMessage: '' 
     };
   	this.messagesRef = this.props.firebase.database().ref('messages');
     this.createMessage = this.createMessage.bind(this); 
@@ -32,12 +32,14 @@ class MessageList extends Component {
   
   /* create a new msg */
   createMessage(e) {
+    const date = new Date();
     e.preventDefault();
     this.messagesRef.push({ 
       content: this.state.newMessage,
-      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      room: this.state.room,
-      username: this.state.username
+      room: this.props.activeRoom.key,
+      sentAt: [date.toLocaleDateString(), date.toLocaleTimeString()],
+      //this.props.firebase.database.ServerValue.TIMESTAMP,
+      username: this.props.user.displayName
     });
     this.setState({ newMessage: '' });
   }
@@ -52,7 +54,7 @@ class MessageList extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const newMessage = { newMessage: this.state.newMessage };
-    this.setState({ messages: [...this.state.messages, newMessage], });
+    this.setState({ messages: newMessage });
   }
   
   /* get messages by filtering for the selected Room */
@@ -77,14 +79,14 @@ class MessageList extends Component {
               <p className="username">{ message.username }</p>
               <p className="sentAt">{ message.sentAt }</p>
             
-            <div id="message-form">
-              <form onSubmit={ this.handleSubmit } >
-                <input id="message-field" type="text" value={ this.props.newMessage } onChange={ this.props.handleChange } />
-                <button id="message-btn" onClick={ this.createMessage }>Send</button>
-              </form>
-            </div> 
+              <div id="message-form">
+                <form onSubmit={ this.handleSubmit } >
+                  <input id="message-field" type="text" value={ this.state.newMessage } onChange={ this.handleChange } />
+                  <button id="message-btn" onClick={ this.createMessage }>Send</button>
+                </form>
+              </div>   
             </div>     
-          )}  
+          )} 
       </div>   
     );
   }

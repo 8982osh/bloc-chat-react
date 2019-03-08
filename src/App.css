@@ -19,11 +19,21 @@
 }
 
 /* RoomList styling */
-
 .container-fluid {
   padding: 60px 50px;
   background-color: #FFFFFF;
 }
+
+/* format user and time on same line */
+.username {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.sentAt {
+  display: inline-block;
+}
+
 
 /* Sidebar styling */
 .sidebar {

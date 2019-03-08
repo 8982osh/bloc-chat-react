@@ -37,9 +37,11 @@ class MessageList extends Component {
     this.messagesRef.push({ 
       content: this.state.newMessage,
       room: this.props.activeRoom.key,
-      sentAt: [date.toLocaleDateString(), date.toLocaleTimeString()],
+      sentAt: date.toLocaleTimeString(),
       //this.props.firebase.database.ServerValue.TIMESTAMP,
       username: this.props.user.displayName
+    }).then(messages=>{
+      this.getRoomMessages();
     });
     this.setState({ newMessage: '' });
   }
@@ -53,8 +55,10 @@ class MessageList extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const newMessage = { newMessage: this.state.newMessage };
-    this.setState({ messages: newMessage });
+    //const newMessage = { newMessage: this.state.newMessage };
+    //this.setState({ messages: newMessage });
+    this.messagesRef.push(this.state.newMessage);
+
   }
   
   /* get messages by filtering for the selected Room */
@@ -70,6 +74,7 @@ class MessageList extends Component {
   /* render messages on center section */
   render() {
     let messageHeader = (this.props.activeRoom.hasOwnProperty('name')) ? `Messages for ${this.props.activeRoom.name}` : '';
+
     return (
       <div className="messageList">
         <h2 className="main-header">{ messageHeader }</h2>
@@ -77,17 +82,18 @@ class MessageList extends Component {
             <div className="message" key={ message.key }>
               <p className="content">{ message.content }</p>
               <p className="username">{ message.username }</p>
-              <p className="sentAt">{ message.sentAt }</p>
-            
-              <div id="message-form">
-                <form onSubmit={ this.handleSubmit } >
-                  <input id="message-field" type="text" value={ this.state.newMessage } onChange={ this.handleChange } />
-                  <button id="message-btn" onClick={ this.createMessage }>Send</button>
-                </form>
-              </div>   
-            </div>     
-          )} 
-      </div>   
+              <p className="sentAt">Sent at: { message.sentAt }</p>
+            </div>
+            )
+          } 
+
+          <div id="message-form">
+            <form onSubmit={ (e) => this.createMessage(e) } >
+              <input id="message-field" type="text" value={ this.state.newMessage } onChange={ (e) => this.handleChange(e) } />
+              <button id="message-btn" type="submit">Send</button>
+            </form>
+          </div>   
+      </div>         
     );
   }
 }
